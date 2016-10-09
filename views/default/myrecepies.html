@@ -1,0 +1,17 @@
+{{extend 'layout.html'}}
+<h1>My Recipes</h1>
+<ul>
+{{for post in rec:}}
+{{=LI(A(post.title, _href=URL("show", args=post.id)))}}
+	<br>
+<img width="200px" src="{{=URL('download',args=post.file)}}" />
+	<br>
+	<br>
+<span>Short Description:</span>
+	{{=SPAN(post.about)}}</br>
+		<h4>
+			{{=A("Edit", _href=URL('edit', args=post.id))}}
+</h4>
+		<hr>
+{{pass}}
+</ul>

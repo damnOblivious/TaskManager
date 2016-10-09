@@ -1,0 +1,16 @@
+{{extend 'layout.html'}}
+{{redirect(URL('show',args=request.args(0)))}}
+<!--h1>session.new={{=session.new}},postid={{=request.args(0)}} and,flag={{=session.flag}}</h1>
+<h1>
+	{{for row in existing:}}
+	STAT={{=row.status}} 
+	PI={{=row.postid}} comp {{=request.args(0)}} >||<
+	UI={{=row.userid}} comp {{=auth.user_id}}
+	<br>
+	{{pass}}
+</h1>
+<h1>{{=currpost.votes}}
+{{=currpost.title}}<br>
+{{=currpost.id}}
+{{=auth.user_id}}
+</h1-->

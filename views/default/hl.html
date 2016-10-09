@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+<meta charset="utf-8">
+<link rel="stylesheet" href="index.css">
+<script src="{{=URL('static','js/one.js')}}"></script>
+<div id="cover">
+</div>
+<div id='subbody'>
+	<img id='icon' src="{{=URL('static','images/cakee.jpg')}}"/>
+	<div id="ssdiv">
+		<h2 id="ss">Your Kitchen Chaperon</h2>
+		<script type="text/javascript">
+change();
+		</script>
+	</div>
+	<h2>
+		<table class="table">
+			{{for i,row in enumerate(x):}}
+			{{if i==items_per_page:break}}
+			<tr>
+				<td><h2><a class="red" href ="{{=URL('show',args=row.id)}}" >{{=row.title}}</a></h2></td>
+				<td>
+					<center>
+						<img class="whenhover" width="200px" height="100px"  src="{{=URL('download',args=row.file)}}"/>
+					</center>
+				</td>
+				<td><h2>{{=row.about}}</h2></td>
+			</tr>
+			{{pass}}
+		</table>
+		{{if page:}}
+		<h2>
+			<a class="red" href="{{=URL(args=[page-1])}}">previous</a>
+			{{pass}}
+		</h2>
+		{{if len(x)>items_per_page:}}
+		<h2>
+			<a class="red" href="{{=URL(args=[page+1])}}">next</a>
+			{{pass}}
+		</h2>
+	</h2>
+</div>

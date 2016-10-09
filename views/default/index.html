@@ -1,0 +1,45 @@
+{{extend 'layout.html'}}
+<meta charset="utf-8">
+{{if len(request.args):}}
+<link rel="stylesheet" href="../../static/css/index.css">
+{{pass}}
+{{if not len(request.args):}}
+<link rel="stylesheet" href="../static/css/index.css">
+{{pass}}
+<script src="{{=URL('static','js/one.js')}}"></script>
+<div id="cover">
+</div>
+	<div id='subbody'>
+		<img id='icon' src="{{=URL('static','images/cakee.jpg')}}"/>
+		<div id="ssdiv">
+			<h2 id="ss">Your Kitchen Chaperon</h2>
+			<script type="text/javascript">
+change();
+			</script>
+		</div>
+		<h1>PREVIOUS POSTS</h1>
+			<div id='prepost'>
+				<table>
+				{{for i,row in enumerate(x):}}
+				{{if i==items_per_page:break}}
+				
+				<tr>
+				    <td><img class='images' id='preimg' src="{{=URL('download', args=row.file)}}" /></td>
+                    <td><h3>{{=LI(A(row.title,_href=URL("show",args=row.id)))}}</h3></td>
+                    <td><div class="hola">{{=row.created_by.first_name}}</div></td>
+				</tr>
+				
+				{{pass}}
+			</table>
+			</div>
+			{{if page:}}
+			<h2>
+				<a class="red" href="{{=URL(args=[page-1])}}">previous</a>
+				{{pass}}
+			</h2>
+			{{if len(x) > items_per_page:}}
+			<h2>
+				<a class="red" href="{{=URL(args=[page+1])}}">next</a>
+				{{pass}}
+			</h2>
+		</div>

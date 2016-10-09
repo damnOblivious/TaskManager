@@ -1,0 +1,8 @@
+h1{
+	font-size:3em;
+}
+#subbody{
+	background-size: 100% 100%;
+	background-image:url("/myapp/static/images/cover.jpg");
+	background-repeat: no-repeat;
+}

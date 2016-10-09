@@ -1,0 +1,1 @@
+{{=redirect(URL('show',args=[request.args(0),currpost.votes]))}}

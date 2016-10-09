@@ -1,0 +1,162 @@
+timestamp: 2016-03-23T18:41:42.883953
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2016-03-23T18:41:43.008271
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-03-23T18:41:43.109275
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2016-03-23T18:41:43.210435
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2016-03-23T18:41:43.311530
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-03-23T18:41:43.412750
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2016-03-26T03:10:42.828001
+CREATE TABLE blog_post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    body CHAR(512)
+);
+success!
+timestamp: 2016-03-26T06:14:03.775496
+ALTER TABLE blog_post ADD about TEXT;
+timestamp: 2016-03-26T06:14:03.916393
+ALTER TABLE blog_post ADD file CHAR(512);
+timestamp: 2016-03-26T06:14:04.017435
+ALTER TABLE blog_post ADD title CHAR(512);
+timestamp: 2016-03-26T06:28:35.067908
+ALTER TABLE auth_user ADD username CHAR(128);
+timestamp: 2016-03-26T06:33:41.110494
+CREATE TABLE post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    about TEXT,
+    file CHAR(512)
+);
+success!
+timestamp: 2016-03-26T07:48:23.763935
+ALTER TABLE post ADD time_stamp DATE;
+timestamp: 2016-03-28T03:07:22.746397
+ALTER TABLE post ADD modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+timestamp: 2016-03-28T03:07:22.935646
+ALTER TABLE post ADD is_active CHAR(1);
+timestamp: 2016-03-28T03:07:23.058704
+ALTER TABLE post ADD created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+timestamp: 2016-03-28T03:07:23.204438
+ALTER TABLE post ADD created_on TIMESTAMP;
+timestamp: 2016-03-28T03:07:23.316754
+ALTER TABLE post ADD modified_on TIMESTAMP;
+timestamp: 2016-03-28T12:15:43.408474
+CREATE TABLE comments(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    postid INTEGER REFERENCES post (id) ON DELETE CASCADE,
+    body CHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2016-03-29T01:23:53.196036
+ALTER TABLE post ADD votes INTEGER;
+timestamp: 2016-03-29T01:23:53.366061
+CREATE TABLE item(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    image CHAR(512),
+    votes INTEGER
+);
+success!
+timestamp: 2016-03-29T16:17:13.094241
+CREATE TABLE likes(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    userid INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    postid INTEGER REFERENCES post (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2016-03-29T16:46:36.423179
+CREATE TABLE post_archive(
+    current_record INTEGER REFERENCES post (id) ON DELETE CASCADE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    about TEXT,
+    file CHAR(512),
+    votes INTEGER,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2016-03-29T16:46:36.546939
+CREATE TABLE comments_archive(
+    current_record INTEGER REFERENCES comments (id) ON DELETE CASCADE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    postid INTEGER REFERENCES post (id) ON DELETE CASCADE,
+    body TEXT,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2016-03-29T17:17:01.310141
+ALTER TABLE post ADD userid CHAR(512);
+timestamp: 2016-03-29T17:17:01.681754
+ALTER TABLE post_archive ADD userid CHAR(512);
+timestamp: 2016-03-29T17:30:52.735610
+ALTER TABLE likes ADD status INTEGER;
+timestamp: 2016-03-29T17:38:50.453290
+ALTER TABLE likes ADD stts INTEGER;
+timestamp: 2016-03-30T08:23:48.035110
+CREATE TABLE dummy(
+    id INTEGER PRIMARY KEY AUTOINCREMENT
+);
+success!
+timestamp: 2016-03-30T08:44:33.428160
+ALTER TABLE post ADD ingredients TEXT;
+timestamp: 2016-03-30T08:44:33.553539
+ALTER TABLE post_archive ADD ingredients TEXT;

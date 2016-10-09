@@ -1,0 +1,56 @@
+{{extend 'layout.html'}}<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/css/show.css">
+</head>
+<body>
+	<div id='post'>
+<h1 id='tit'>{{=curr.title}}</h1>
+<img id='postpic' src="{{=URL('download', args=curr.file)}}" />
+<div id='vote'>
+	<h6>Votes  {{=curr.votes}}</h6>
+	{{=voting}}
+</div>
+<h1 id='by'>... by {{=curr.created_by.first_name}}</h1>
+<h1 id='abt'>About...<br>
+</h1>
+<h3>{{=curr.about}}</h3>
+<br>
+</div>
+
+<div id='comments'>
+	{{for comment in com:}}
+	<h4>		{{=comment.created_by.first_name}}  says-  </h4>
+		<h5>{{=comment.body}}</h5>
+		on  {{=comment.created_on}} <br><br>
+	{{pass}}
+</div>
+<div id='form'>
+<h2>Whats on Your Mind!!!<h2>
+	{{=form}}
+</div>
+
+
+
+
+
+<h1>
+</h1>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
